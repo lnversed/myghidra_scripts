@@ -29,8 +29,10 @@ setstr = lambda addr: createAsciiString(toAddr(addr))
 setlabel = lambda x,y: createLabel(toAddr(x), y, True)
 
 with open("/home/kali/Documents/projects/mercusys/_ac12v2-up_2020-09-03_10.35.35.bin.extracted/symtable.dump") as f:
-    for l in f:
-
+    for l in f.readlines():
+        if l == "\n":
+            continue
+           
         symdata = l.strip("\n")
         symfunc_addr = p32(symdata[8:])
         symstr_addr = p32(symdata[:8])
